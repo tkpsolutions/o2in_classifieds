@@ -1,0 +1,246 @@
+/*
+google fonts
+*/
+/*  For all headings  
+font-family: 'Mukta', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Mukta&display=swap');
+
+
+it is already imported in sb-admin.css so we are not importing it again here
+*/
+
+/* For all other general fonts : font-family: 'Assistant', sans-serif;*/
+@import url('https://fonts.googleapis.com/css2?family=Assistant&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Mukta&display=swap');
+
+html {
+  height: 100%;
+}
+
+/*
+input settings
+*/
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+input[type="number"] {
+-moz-appearance: textfield;
+}
+
+/*
+js script alert
+*/
+.app-alert
+{
+	position: fixed;
+	top: 10%;
+	right: 0;
+	z-index:10;
+	width:40%;
+	font-size: 16px;
+	padding: 10px;
+}
+
+.app-alert.success
+{
+	background-color: #cfffd1;
+	border: #1d7521 thin solid;
+}
+
+.app-alert.danger
+{
+	background-color: #ffcfd1;
+	border: #751d21 thin solid;
+}
+
+.app-alert.warning
+{
+	background-color: #ffdbb3;
+	border: #e68010 thin solid;
+}
+
+.alert-dismissable .close, .alert-dismissible .close
+{
+	right: -5px;
+}
+
+/*
+defaults
+*/
+.col-def 
+{
+	padding:0px !important;
+}
+
+.row
+{
+	margin: 0px !important;
+}
+
+.container-fluid, .container
+{
+	padding:0px !important;
+}
+
+.y-scroll
+{
+	scroll-direction: horizontal;
+	overflow-x: scroll;
+}
+
+/*
+login-panel
+*/
+.login-panel
+{
+	margin-top: 30px !important;
+}
+
+.login-panel .design-section
+{
+	background-color: #233e80;
+	color: #fff;
+	line-height: 25px;
+	height: 305px;
+	padding: 30px;
+	border: #fff 5px solid;
+}
+
+.login-panel .design-section .title
+{
+	margin: 0px;
+	padding: 20px;
+	text-align: center;
+}
+
+.login-panel .design-section .message
+{
+	padding: 5px 25px;
+}
+
+.login-panel .form-section
+{
+	background-color: #e3ebff;
+	height: 305px;
+	padding: 30px;
+}
+
+/*
+admin-panel-content
+*/
+.admin-panel-content
+{
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
+/*
+page
+*/
+.page-heading
+{
+}
+
+.page-heading .page-title
+{
+	font-size: 16px;
+	margin-bottom: 40px;
+	padding: 10px;
+	background-color: #e3ebff;
+	border-radius: 5px;
+}
+
+/*
+panel
+*/
+.app-panel-1
+{
+	
+	border: #e3ebff 1px solid;
+}
+
+.app-panel-1 .panel-heading
+{
+	border-bottom: #e3ebff 1px solid;
+}
+
+.app-panel-1 .panel-heading .panel-title
+{
+	font-size: 16px;
+}
+
+.app-panel-1 .panel-heading .panel-sub-title
+{
+	font-size: 12px;
+	color: #ccc;
+	font-weight: normal;
+	margin: 5px 0px;
+}
+
+.app-panel-1 .panel-heading .panel-title a
+{
+	color:#fff;
+}
+
+/*
+.dashboard-information-tile
+*/
+.dashboard-information .dashboard-information-tile{
+	line-height: 25px;
+	padding: 5px 15px;
+	margin: 15px 0px;
+	border-radius: 15px;
+	font-size: medium;
+}
+
+.dashboard-information .dashboard-information-tile.type-1{
+	background-image: linear-gradient(to right top, #233e80, #24448c, #264998, #264fa4, #2755b0, #2d5ab5, #325eb9, #3763be, #4167bc, #496cba, #5170b7, #5974b5);
+	color: #fff;
+	border: #233e80 3px solid;
+}
+
+.dashboard-information .dashboard-information-tile.type-1:hover{
+	background-color: #fff;
+	color: #233e80;
+}
+
+.dashboard-information .dashboard-information-tile.type-2{
+	background-image: linear-gradient(to right top, #1d7521, #1b7a1f, #18801d, #16851a, #128b17, #1d921f, #269a27, #2ea12e, #3fac3f, #4fb750, #5ec360, #6cce70);
+	color: #fff;
+	border: #1d7521 3px solid;
+}
+
+.dashboard-information .dashboard-information-tile.type-2:hover{
+	background-color: #fff;
+	color: #1d7521;
+}
+
+.dashboard-information .dashboard-information-tile.type-3{
+	background-image: linear-gradient(to right top, #751d21, #7c1b1f, #83181d, #89151b, #901218, #991a1e, #a12123, #aa2829, #b63839, #c24749, #ce565a, #d9656a);
+	color: #fff;
+	border: #751d21 3px solid;
+}
+
+.dashboard-information .dashboard-information-tile.type-3:hover{
+	background-color: #fff;
+	color: #751d21;
+}
+
+.dashboard-information .dashboard-information-tile.type-4{
+	background-image: linear-gradient(to right top, #18171a, #1a181d, #1b1920, #1d1924, #1e1a27, #24202e, #2a2734, #302d3b, #3d3b47, #4b4a52, #5a595e, #69696a);
+	color: #fff;
+	border: #18171A 3px solid;
+}
+
+.dashboard-information .dashboard-information-tile.type-4:hover{
+	background-color: #fff;
+	color: #18171A;
+}
+
+/* app-table */
+.app-table thead th{
+	background-color: #233e80;
+	color: #fff;
+}

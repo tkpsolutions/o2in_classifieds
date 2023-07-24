@@ -1,0 +1,376 @@
+/*!
+ * Start Bootstrap - SB Admin Bootstrap Admin Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+ 
+ /*
+google fonts
+-------------
+@import url('https://fonts.googleapis.com/css2?family=Mukta&display=swap');
+font-family: 'Mukta', sans-serif;
+
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Antique&display=swap');
+font-family: 'Shippori Antique', sans-serif;
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Mukta&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Antique&display=swap');
+
+body {
+    margin-top: 50px;
+	font-size: 12px;
+	min-height: 100%;
+	font-family: 'Shippori Antique', sans-serif;
+}
+
+.navbar-dark {
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 50px;
+	background-color: #fff;
+	border: none;
+	box-shadow: #ddd 3px 3px 5px;
+	z-index: 100;
+}
+
+@media(min-width:768px) {
+    body {
+        margin-top: 50px;
+    }
+}
+
+#wrapper {
+    padding-left: 0;
+	background: none;
+}
+
+#page-wrapper {
+    width: 100%;
+    padding: 0 !important;
+	border: none;
+}
+
+.huge {
+    font-size: 50px;
+    line-height: normal;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 175px;
+    }
+
+    #page-wrapper {
+        padding: 10px;
+    }
+}
+
+.navbar-brand {
+    color: #999!important;
+    padding: 0px;
+	padding-left: 5px;
+}
+
+.navbar-brand:hover {
+    color: #fff !important;
+}
+
+.navbar-brand img
+{
+	height: 40px;
+	width: 150px;
+	padding: 2px;
+	margin-top: 5px;
+	border-radius: 10px;
+}
+
+.navbar-header .btn
+{
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
+/* Top Navigation */
+
+.top-nav {
+    padding: 0 15px;
+}
+	
+.top-nav>li {
+    display: inline-block;
+    float: left;
+	border-left: #ccc thin solid;
+	padding: 0px;
+	height: 40px;
+	margin-top: 5px;
+}
+
+.top-nav>li>a>i
+{
+	padding: 5px;
+	margin-right: 2px;
+	width: 25px;
+	height: 25px;
+	font-size: 15px;
+	text-align: center;
+	border-radius: 50%;
+}
+
+.top-nav>li>a>i.red
+{
+	background-color: #c00;
+	color: #fff;
+}
+
+.top-nav>li>a>i.blue
+{
+	background-color: #3D4AA3;
+	color: #fff;
+}
+
+.top-nav>li>a>i.green
+{
+	background-color: #0c0;
+	color: #fff;
+}
+
+.top-nav>li>a {
+    color: #000 !important;
+    text-decoration: none;
+	height: 100%;
+	padding: 10px;
+}
+
+.top-nav>li>a:hover,
+.top-nav>li>a:focus,
+.top-nav>.open>a,
+.top-nav>.open>a:hover,
+.top-nav>.open>a:focus {
+    color: #fff;
+    background-color: transparent !important;
+}
+
+.top-nav>.open>.dropdown-menu {
+    float: left;
+    position: absolute;
+	box-shadow: none;
+    background-color: #fff;
+	padding: 0px;
+	margin-top: 5px;
+}
+
+.top-nav>.open>.dropdown-menu>li
+{
+	margin: 0px;
+}
+
+.top-nav>.open>.dropdown-menu>li>a {
+    white-space: nowrap;
+    color: #000;
+    text-decoration: none;
+	padding: 10px;
+}
+
+.top-nav>li.alert a
+{	
+	padding: 0px 10px !important;
+	background-color: #b82316;
+	color: #fff !important;
+	font-weight: bold;
+	border-radius: 25px;
+}
+
+.top-nav>li.special a
+{
+	background-color: #3D4AA3;
+	color: #fff !important;
+	font-weight: bold;
+}
+
+.top-nav>li.special a:hover
+{		
+	background-color: #fff !important;
+	color: #3D4AA3 !important;
+}
+
+.top-nav>li.alert a{
+    animation:blinkingBackground 0.8s infinite;
+}
+
+@keyframes blinkingBackground{
+    0%{     background-color: #d43f3a;    }
+    50%{    background-color: #129637;  }
+	60%{    background-color: #129637;  }
+    100%{   background-color: #d43f3a;    }
+}
+
+.top-nav>li.notification:hover a
+{
+	background-color: #000;
+	color: #FFF !important;
+}
+
+.footer{
+	position: fixed;
+	bottom: 1px;
+	background-color: #D6DDE1;
+	width: 100%;
+	padding: 10px;
+}
+
+/* Side Navigation */
+@media(min-width:768px) {
+    .side-nav {
+        position: fixed;
+        top: 50px;
+        left: 220px;
+        width: 175px;
+        margin-left: -225px;
+        border: none;
+        border-radius: 0;
+        overflow-y: auto;
+        background-color: #222;
+        bottom: -50px;
+        overflow-x: hidden;
+        padding-bottom: 40px;
+		box-shadow: none;
+    }
+
+	.side-nav>li
+	{
+		margin-bottom: 10px;
+		width: 100%;
+	}
+	
+	.side-nav>li>a {
+        width: 175px;
+    }
+
+	.side-nav>li:hover,
+    .side-nav li a:hover,
+    .side-nav li a:focus {
+        outline: none;
+        background-color: #fff !important;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+	.side-nav>li>a {
+		font-size: 14px;
+	}
+	
+	.side-nav li a:hover,
+    .side-nav li a:focus {
+        outline: none;
+        background-color: #fff !important;
+    }
+}
+
+.side-nav {
+    border: none;
+    border-radius: 0px;
+	background-color: #233e80;
+	box-shadow: #ddd 3px 3px 3px;
+	padding-top: 10px;
+}
+
+.side-nav>li {
+    border: none;
+    background: none;
+    padding: 0;
+    border-radius: 0px;
+	margin-bottom: 10px;
+}
+
+.side-nav .list-group-item.active {
+    background: #072D45;
+}
+
+.side-nav>li>a {
+    width: 175px;
+    position: relative;
+    display: block;
+    padding: 7px 15px;
+	padding-right: 0;
+	color: #fff;
+	font-size: 14px;
+	border-radius: 0px;
+}
+
+.side-nav>li>a>i
+{
+	margin-right: 3px;
+	color: #fff;
+}
+
+.side-nav>li>a:hover,
+.side-nav>li>a:focus,
+.side-nav>li>a:active,
+.side-nav>li>a:hover i,
+.side-nav>li>a:focus i,
+.side-nav>li>a:active i {
+    text-decoration: none;
+    color: #000 !important;
+	border-radius: 0px;
+}
+
+.side-nav>li>ul {
+    padding: 0;
+}
+
+.side-nav .dropdown-menu
+{
+	border: none !important;
+	box-shadow: none;
+	padding-left: 10px;
+}
+
+.side-nav>li>ul>li {
+    background-color: #fff;
+    padding: 0px;
+    border: none;
+    border-radius: 0px;
+	margin-bottom: 5px;
+}
+
+.side-nav>li>ul>li>a {
+    display: block;
+    padding: 10px 15px 10px 38px;
+    text-decoration: none;
+	font-size: 12px;
+	color: #000;
+}
+
+.side-nav>li>ul>li>a:hover {
+    color: #323955;
+}
+
+.side-nav>li>ul>li>a>i
+{
+	font-size: 5px !important;
+	margin-right: 3px;
+}
+
+.side-nav .list-group-item.divider
+{
+	border-top: #D6DDE1 thin solid !important;
+	margin: 10px 10px 5px 10px;
+	width: 80%;
+	color: #fff;
+}
+
+.side-nav .dropdown-menu
+{
+	width: 100%;
+	position: relative;
+}
+
+.side-nav .dropdown-menu li a
+{
+	padding: 5px 15px;
+}
+
+.table-container{
+	overflow-x: auto !important;
+}
