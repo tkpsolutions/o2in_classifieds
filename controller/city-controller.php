@@ -10,7 +10,7 @@ class CityController {
         $stateIds = "0";
     
         while ($row = mysqli_fetch_array($rows)) {
-            $city = new City($row['id'], $row['stateId'], $row['name'], $row['lat'], $row['lng'], $row['status']);
+            $city = new City($row['id'], $row['stateId'], $row['name'], $row['image'], $row['lat'], $row['lng'], $row['status']);
             array_push($citys, $city);
             $stateIds = $stateIds ."," . $row['stateId'];
         }
@@ -39,7 +39,7 @@ class CityController {
         $stateIds = "0";
 
         while ($row = mysqli_fetch_array($rows)) {
-            $city = new City($row['id'], $row['stateId'], $row['name'], $row['lat'], $row['lng'], $row['status']);
+            $city = new City($row['id'], $row['stateId'], $row['name'], $row['image'], $row['lat'], $row['lng'], $row['status']);
             $stateIds = $stateIds ."," . $row['stateId'];
         }
 
@@ -90,14 +90,14 @@ class CityController {
 
     public function add($city) {
         include('db_connection.php');
-        $query = "INSERT INTO city (id, stateId, name, status) VALUES ('" . $city->getId() . "', '" . $city->getStateId() . "', '" . $city->getName() . "','" . $city->getLat() . "','" . $city->getLng() . "', '" . $city->getStatus() . "')";
+        $query = "INSERT INTO city (id, stateId, name,image,lat,lng, status) VALUES ('" . $city->getId() . "', '" . $city->getStateId() . "', '" . $city->getName() . "', '" . $city->getImage() . "','" . $city->getLat() . "','" . $city->getLng() . "', '" . $city->getStatus() . "')";
         mysqli_query($db_connection, $query);
         return mysqli_insert_id($db_connection);
     }
 
     public function update($city) {
         include('db_connection.php');
-        $query = "UPDATE city SET stateId = '" . $city->getStateId() . "', name = '" . $city->getName() . "', lat = '" . $city->getLat() . "', lng = '" . $city->getLng() . "', status = '" . $city->getStatus() . "' WHERE id = " . $city->getId();
+        $query = "UPDATE city SET stateId = '" . $city->getStateId() . "', name = '" . $city->getName() . "', image = '" . $city->getImage() . "', lat = '" . $city->getLat() . "', lng = '" . $city->getLng() . "', status = '" . $city->getStatus() . "' WHERE id = " . $city->getId();
         return mysqli_query($db_connection, $query);
     }
 

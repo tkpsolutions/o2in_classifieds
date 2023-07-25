@@ -3,6 +3,7 @@ class City {
     private $id;
     private $stateId;
     private $name;
+    private $image;
     private $lat;
     private $lng;
     private $status;
@@ -32,6 +33,14 @@ class City {
 
     public function setName($name) {
         $this->name = $name;
+    }
+
+    public function getImage() {
+        return $this->image;
+    }
+
+    public function setImage($image) {
+        $this->image = $image;
     }
 
     public function getLat() {
@@ -68,10 +77,11 @@ class City {
 
     }
     
-    public function __construct($id, $stateId, $name, $lat, $lng,$status) {
+    public function __construct($id, $stateId, $name,$image, $lat, $lng,$status) {
         $this->id = $id;
         $this->stateId = $stateId;
         $this->name = $name;
+        $this->image = $image;
         $this->lat = $lat;
         $this->lng = $lng;
         $this->status = $status;
