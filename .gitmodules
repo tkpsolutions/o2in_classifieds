@@ -1,0 +1,3 @@
+[submodule "o2in_classifieds"]
+	path = o2in_classifieds
+	url = https://github.com/tkpsolutions/o2in_classifieds.git
