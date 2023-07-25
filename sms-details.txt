@@ -18,4 +18,9 @@ Hi+The+King+Phoenix+IT+Solutions+and+IT+Training%2C+you+have+successfully+activa
 
 http://139.99.131.165/api/v2/SendSMS?SenderId=SBLSER&Message=Hi+The+King+Phoenix+IT+Solutions+and+IT+Training%2C+you+have+successfully+activated+your+account+at+SBL+SERVICES+O2IN.+Now+book+your+medical+appointments+from+anywhere+anytime.&MobileNumbers=9790256734&PrincipleEntityId=1301167688760756044&TemplateId=1307168378693455448&ApiKey=XiyHNZcXPdlYdhLYh4%2FAklQI31lO6L0nrArq9gMYpPE%3D&ClientId=687700d1-aaeb-44cc-abe1-d1e9445166be
 
+http://139.99.131.165/api/v2/SendSMS?SenderId=SBLSER&Message=Hi+The+King+Phoenix+IT+Solutions+and+IT+Training%2C+you+have+successfully+activated+your+account+at+SBL+SERVICES+O2IN.+Now+book+your+medical+appointments+from+anywhere+anytime.&MobileNumbers=9790256734&PrincipleEntityId=1301167688760756044&TemplateId=1307168378693455448&ApiKey=XiyHNZcXPdlYdhLYh4%2FAklQI31lO6L0nrArq9gMYpPE%3D&ClientId=687700d1-aaeb-44cc-abe1-d1e9445166be
+
+
+
+
 $unday2027
