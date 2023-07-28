@@ -95,8 +95,10 @@
 <!-- scrollToTop end -->
 
 
-<!-- jQuery -->
+<!-- jQuery
 <script src="../assets/js/jquery-3.6.3.min.js"></script>
+-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 
 <!-- Bootstrap Core JS -->
 <script src="../assets/js/bootstrap.bundle.min.js"></script>

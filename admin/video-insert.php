@@ -23,7 +23,7 @@ if($videoId > 0)
 	{ 
 		$status = $_POST['status']; 
 		$video = new Video ($videoId, $youtubeLinkId, $tempTitle,$description,"","", $status);
-		$videoId = $videoController->update($video);
+		$videoController->update($video);
 		echo $videoId;
 		exit();
 	}

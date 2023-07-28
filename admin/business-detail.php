@@ -1,14 +1,24 @@
 <?php
 include('init.php');
 
-$id = 0;
 $businessId = 0;
+if (isset($_GET['id'])) {
+    $businessId = $_GET['id'];
+}
+$business = $businessController->getById($businessId);
+
+if( $business == null ){
+    header("location: business-view.php");
+    exit();
+}
+
+$id = 0;
 $descriptionLong = "";
 $addressLine1 = "";
 $addressLine2 = "";
 $pincode = "";
-$lat = "";
-$lng = "";
+$lat = $business->getCity()->getLng();
+$lng = $business->getCity()->getLat();
 $createdDateTime = "";
 $updatedDateTime = "";
 $status = "";
@@ -18,13 +28,7 @@ $banner = "";
 $logoRequired = "required";
 $bannerRequired = "required";
 
-if (isset($_GET['id'])) {
-    $businessId = $_GET['id'];
-}
-
-$business = $businessController->getById($businessId);
 $businessDetail = $businessDetailController->getByBusinessId($businessId);
-
 if ($businessDetail != null) {
     $id = $businessDetail->getId();
     //$businessId = $businessDetail->getBusinessId();
@@ -42,12 +46,14 @@ if ($businessDetail != null) {
     $pincode = $businessDetail->getPincode();
     $lat = $businessDetail->getLat();
     $lng = $businessDetail->getLng();
+    if( strlen( trim($lat) ) <= 2 ){
+        $lat = $business->getCity()->getLng();
+        $lng = $business->getCity()->getLat();
+    }
     $createdDateTime = $businessDetail->getCreatedDateTime();
     $updatedDateTime = $businessDetail->getUpdatedDateTime();
     $status = $businessDetail->getStatus();
 }
-
-$businesses = $businessController->getAll();
 ?>
 
 <!DOCTYPE html>
@@ -151,17 +157,28 @@ $businesses = $businessController->getAll();
                                             </div>
                                         <?php } ?>
                                         <div class="clearfix"></div>
-                                        
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
+
+
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
                                             <div class="form-group">
-                                                <label>Map Location</label>
-                                                Lat <input type="text" id="lat" name="lat" value="<?php echo $lat; ?>" style="width: 200px" />
-                                                Long: <input type="text" id="lng" name="lng" value="<?php echo $lng; ?>" style="width: 200px" />
-                                                <div id="us2" style="width: 500px; height: 400px;"></div>
+                                                <label for="pincode">Latitude</label>
+                                                <input type="text" required id="lat" name="lat" class="form-control" readonly value="<?php echo $lat; ?>">
                                             </div>
                                         </div>
-                                        
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label for="pincode">Longitude</label>
+                                                <input type="text" required id="lng" name="lng" class="form-control" readonly value="<?php echo $lng; ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <div id="us2" style="width: 100%; height: 400px; border: #000 2px solid"></div>
+                                            </div>
+                                        </div>
+
                                         <div class="clearfix"></div>
+                                        <div id="somecomponent"></div>
                                         <div class="col-md-3 col-sm-6 col-xs-12">
                                             <div class="form-group">
                                                 <?php if ($businessId > 0) { ?>
@@ -182,29 +199,18 @@ $businesses = $businessController->getAll();
         </div>
     </div>
 
-
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyBpJ-1-6A67HL_x2UzmsBB4NrT8pd-3oLs&callback=loadMap"></script>
     <script type="text/javascript" src="https://unpkg.com/location-picker@1.1.1/dist/location-picker.min.js"></script>
-    
-    
     <script src="../theme/js/gmap.js"></script>
 
     <script>
-    
-        function loadMap(){
-            var map = document.getElementById('us2');
-            
-              // Initialize LocationPicker plugin
-              var lp = new locationPicker(map, {
-                setCurrentPosition: true, // You can omit this, defaults to true
-                lat: 45.5017,
-                lng: -73.5673
-              }, {
-                zoom: 15 // You can set any google map options here, zoom defaults to 15
-              });
+
+        function loadMap()
+        {
+            //googleMapPicker(45.5017, -73.5673);
+            googleMapPicker(<?php echo $lat; ?>, <?php echo $lng; ?>);
         }
-    
+
         $(document).ready(function() {
             // Form submission
             $("#form-1").on('submit', function(e) {
@@ -273,3 +279,5 @@ $businesses = $businessController->getAll();
 </body>
 
 </html>
+
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyBpJ-1-6A67HL_x2UzmsBB4NrT8pd-3oLs&callback=loadMap"></script>

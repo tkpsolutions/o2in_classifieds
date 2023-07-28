@@ -15,7 +15,7 @@ $updatedDateTime = "";
 $mobile = "";
 $password = "";
 $status = "";
-
+$userAgents = $userController->getByRole("agent");
 
 if ($business != null) {
     $id = $business->getId();
@@ -92,13 +92,49 @@ $categories = $categoryController->getAll();
                                 <form id="form-1">
                                     <input type="text" id="id" name="id" value="<?php echo $businessId; ?>" class="hidden" readonly />
                                     <div class="row">
+                                        <?php
+                                        if( $business == null ){
+                                        ?>
+                                            <div class="col-md-6 col-xs-12">
+                                                <div class="form-group">
+                                                    <label> Agents </label>
+                                                    <select id="userId" name="userId" class="form-control">
+                                                        <option value="0">Select an agent</option>
+                                                        <?php
+                                                        foreach($userAgents as $userAgent)
+                                                        {
+                                                        ?>
+                                                            <option value="<?php echo $userAgent->getId(); ?> ?>">
+                                                                <?php echo $userAgent->getName() . "(PH: " . $userAgent->getMobile(); ?>
+                                                            </option>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        <?php
+                                        }
+                                        else{
+                                        ?>
+                                            <div class="col-md-6 col-xs-12">
+                                                <div class="form-group">
+                                                    <label> Business Agent </label>
+                                                    <input class="form-control" readonly value="<?php echo $business->getUser()->getName(); ?>" />
+
+                                                    <input class="hidden" id="userId" name="userId" readonly value="<?php echo $business->getUserId(); ?>" />
+                                                </div>
+                                            </div>
+                                        <?php
+                                        }
+                                        ?>
                                        <div class="col-md-6 col-xs-12">
                                             <div class="form-group">
                                                 <label> Name </label>
                                                 <input type="text" id="name" name="name" class="form-control" value="<?php echo $name; ?>" />
                                             </div>
                                        </div>
-                                       <div class="col-md-6 col-xs-12">
+                                       <div class="col-md-12 col-xs-12">
                                             <div class="form-group">
                                                 <label> DescriptionShort </label>
                                                 <input type="text" id="descriptionShort" name="descriptionShort" class="form-control" value="<?php echo $descriptionShort; ?>" />
@@ -204,6 +240,14 @@ $categories = $categoryController->getAll();
             // form-content
             $("#form-1").on("submit", function(e) {
                 e.preventDefault();
+
+                // userId
+                value = document.getElementById("userId");
+                if (value.selectedIndex == 0) {
+                    showAlert("2", "Please select Agent");
+                    value = document.getElementById("userId").focus();
+                    return false;
+                }
 
                  // name
                  value = document.getElementById("name").value.trim();

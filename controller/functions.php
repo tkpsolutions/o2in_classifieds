@@ -31,7 +31,8 @@ function PF_isImageExtensionAllowed($configController, $ext)
 	return $validExtension;
 }
 
-function PF_sendSMS($configController, $mobile, $message)
+//templateId : 1307168958929119020
+function PF_sendSMS($configController, $mobile, $message, $templateId)
 {
 	//getting sms plugin information
 	$senderId = $configController->getByName("msg_sms_sender_id")->getValue();
@@ -40,8 +41,10 @@ function PF_sendSMS($configController, $mobile, $message)
 	$entityId = $configController->getByName("msg_sms_entity_id")->getValue();
 	//sms coding
 	$message = urlencode($message);
+	echo $message;
 
-	$url = "http://139.99.131.165/api/v2/SendSMS?SenderId=".$senderId."&Message=".$message."&MobileNumbers=".$mobile."&PrincipleEntityId=".$entityId."&TemplateId=1307168958929119020&ApiKey=".$username."&ClientId=" . $password;
+	$url = "http://139.99.131.165/api/v2/SendSMS?SenderId=".$senderId."&Message=".$message."&MobileNumbers=".$mobile."&PrincipleEntityId=".$entityId."&TemplateId=".$templateId."&ApiKey=".$username."&ClientId=" . $password;
+	
 	//echo $url;
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_HEADER, 0);

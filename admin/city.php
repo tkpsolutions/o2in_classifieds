@@ -214,7 +214,7 @@ $states = $stateController->getAll('active');
                             if (data > 0) {
                                 showAlert("1", "Successful Inserted");
                                 waitingDialog.hide();
-                                window.location = "city-view.php?id=" + data;
+                                window.location = "city.php?id=" + data;
                             } else {
                                 showAlert("2", "Error: " + data);
                                 waitingDialog.hide();

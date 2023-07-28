@@ -1,8 +1,8 @@
 <?php
 include('init.php');
 $videoId = $_POST['id'];
-$title = str_replace("'","\'",$_POST['title']);
-$description = str_replace("'","\'",$_POST['description']);
+$title = str_replace("'", "\'", $_POST['title']);
+$description = str_replace("'", "\'", $_POST['description']);
 $video = $_FILES['video']['name'];
 
 $createdDateTime = null;
@@ -37,30 +37,33 @@ if (!empty($video)) {
     $videoFilepath = "../images/hostvideos/" . $videoId . '.' . $videoExt;
     move_uploaded_file($videoSourcePath, $videoFilepath);
 
-   // Video Compression using FFmpeg
-$videoResolution = str_replace('*', 'x', $_POST['resolution']); 
-$outputDir = "../images/hostvideos/"; 
+    /*
+    // Video Compression using FFmpeg
+    $videoResolution = str_replace('*', 'x', $_POST['resolution']);
+    $outputDir = "../images/hostvideos/";
 
-$compressedVideoName = $videoId . '_compressed.mp4';
-$compressedVideoPath = $outputDir . $compressedVideoName;
+    $compressedVideoName = $videoId . '_compressed.mp4';
+    $compressedVideoPath = $outputDir . $compressedVideoName;
 
-$command = "C:/ffmpeg/bin/ffmpeg -i \"$videoFilepath\" -s $videoResolution \"$compressedVideoPath\" 2>&1";
-exec($command, $output, $returnVal);
+    $command = "C:/ffmpeg/bin/ffmpeg -i \"$videoFilepath\" -s $videoResolution \"$compressedVideoPath\" 2>&1";
+    exec($command, $output, $returnVal);
 
-if ($returnVal === 0) {
-    unlink($videoFilepath);
+    if ($returnVal === 0) {
+        unlink($videoFilepath);
 
-    // Move compressed video to the specific folder
-    $compressedVideoDestination = $outputDir . $videoId . '.' . $videoExt;
-    rename($compressedVideoPath, $compressedVideoDestination);
+        // Move compressed video to the specific folder
+        $compressedVideoDestination = $outputDir . $videoId . '.' . $videoExt;
+        rename($compressedVideoPath, $compressedVideoDestination);
 
+        echo $videoId;
+        exit();
+    } else {
+        echo "Error: Video compression failed. Please check the FFmpeg command and try again.";
+        exit();
+    }
+    */
     echo $videoId;
     exit();
-} else {
-    echo "Error: Video compression failed. Please check the FFmpeg command and try again.";
-    exit();
-}
 }
 echo $videoId;
 exit();
-?>

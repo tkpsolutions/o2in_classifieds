@@ -128,7 +128,8 @@ class EventController {
     
     public function update($event) {
         include('db_connection.php');
-        $query = "UPDATE events SET eventCategoryId = '" . $event->getEventCategoryId() . "', cityId = '" . $event->getCityId() . "', eventDate = '" . $event->getEventDate() . "', title = '" . $event->getTitle() . "', description = '" . $event->getDescription() . "', image = '" . $event->getImage() . "', address = '" . $event->getAddress() . ", updatedDateTime = NOW(), status = '" . $event->getStatus() . "' WHERE id = " . $event->getId();
+        $query = "UPDATE events SET eventCategoryId = '" . $event->getEventCategoryId() . "', cityId = '" . $event->getCityId() . "', eventDate = '" . $event->getEventDate() . "', title = '" . $event->getTitle() . "', description = '" . $event->getDescription() . "', image = '" . $event->getImage() . "', address = '" . $event->getAddress() . "', updatedDateTime = NOW(), status = '" . $event->getStatus() . "' WHERE id = " . $event->getId();
+        //echo $query;
         return mysqli_query($db_connection, $query);
     }
     

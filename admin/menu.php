@@ -8,14 +8,9 @@
 		<a class="navbar-brand" href="index.php">
 			<img src="<?php echo $websiteLogo; ?>" class="img-responsive" style="padding: 0px 5px" />
 		</a>
-
 	</div>
 
-
-
 	<ul class="nav navbar-nav top-nav navbar-right">
-
-
 
 		<li class="dropdown nav-item ">
 			<a href="javascript:;" class="nav-link dropdown-toggle" data-toggle="dropdown">
@@ -25,29 +20,30 @@
 			</a>
 			<ul class="dropdown-menu">
 				<li class="dropdown-item">
-					<a href="#">Update Profile</a>
+					<a href="my-profile.php">Update Profile</a>
 				</li>
 				<li class="dropdown-item">
-					<a href="#">Update Password</a>
+					<a href="my-password.php">Update Password</a>
 				</li>
 				<li class="dropdown-item">
 					<a href="logout.php">Logout</a>
 				</li>
 			</ul>
 		</li>
-		<!--
 		<li class="dropdown nav-item">
 			<a href="javascript:;" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fas fa-gear "></i></a>
 			<ul class="dropdown-menu">
 				<li class="dropdown-item">
-					<a href="#" target="_blank">Mail Configuration</a>
+					<a href="city-view.php">City</a>
 				</li>
 				<li class="dropdown-item">
-					<a href="#" target="_blank">System Settings</a>
+					<a href="user-customers.php">Customers</a>
+				</li>
+				<li class="dropdown-item">
+					<a href="user-agents.php">Agents</a>
 				</li>
 			</ul>
 		</li>
-		-->
 	</ul>
 	<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
 	<div class="collapse navbar-collapse navbar-toggleable-sm navbar-ex1-collapse">

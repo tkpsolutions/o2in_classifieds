@@ -14,7 +14,7 @@ if ($business == null) {
 }
 
 $businessTags = $businessTagController->getByBusinessId($businessId);
-$tags = $tagController->getByStatus("active");
+$tags = $tagController->getByCategoryId($business->getCategoryId());
 
 ?>
 
@@ -121,10 +121,6 @@ $tags = $tagController->getByStatus("active");
                                                     <td>
                                                         <a href="<?php echo $deleteLink; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</a>
                                                     </td>
-
-
-
-
                                                 </tr>
                                             <?php
                                                 $i++;

@@ -12,19 +12,28 @@ $businessDetailAddressLine1 = "";
 $businessDetailAddressLine2 = "";
 $businessDetailPincode = "";
 $businessDetailDescriptionLong = "";
+$lat = $business->getCity()->getLng();
+$lng = $business->getCity()->getLat();
 
 if( $businessDetail != null ){
-$businessDetailId = $businessDetail->getId();
-$businessDetailAddressLine1 = $businessDetail->getAddressLine1();
-$businessDetailAddressLine2 = $businessDetail->getAddressLine2();
-$businessDetailPincode = $businessDetail->getPincode();
-$businessDetailDescriptionLong = $businessDetail->getDescriptionLong();
+	$businessDetailId = $businessDetail->getId();
+	$businessDetailAddressLine1 = $businessDetail->getAddressLine1();
+	$businessDetailAddressLine2 = $businessDetail->getAddressLine2();
+	$businessDetailPincode = $businessDetail->getPincode();
+	$businessDetailDescriptionLong = $businessDetail->getDescriptionLong();
+	$lat = $businessDetail->getLat();
+    $lng = $businessDetail->getLng();
+    if( strlen( trim($lat) ) <= 2 ){
+        $lat = $business->getCity()->getLng();
+        $lng = $business->getCity()->getLat();
+    }
 }
 
 $businessCategoryId = 0;
 if( $business->getCategory() != null ){
 	$businessCategoryId = $business->getCategoryId();
 }
+echo $lat . " --- " . $lng;
 ?>
 
 <!DOCTYPE html>
@@ -153,6 +162,30 @@ if( $business->getCategory() != null ){
 													</div>
 												</div>
 											</div>
+											<div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
+												<div class="form-group">
+													<label class="col-form-label">Latitude</label>
+													<div class="pass-group group-img">
+														<span class="lock-icon"><i class="feather-lock"></i></span>
+														<input type="text" readonly class="form-control pass-input" value="<?php echo $lat; ?>" id="lat" name="lat">
+													</div>
+												</div>
+											</div>
+											<div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
+												<div class="form-group">
+													<label class="col-form-label">Longitude</label>
+													<div class="pass-group group-img">
+														<span class="lock-icon"><i class="feather-lock"></i></span>
+														<input type="text" readonly class="form-control pass-input" value="<?php echo $lng; ?>" id="lng" name="lng">
+													</div>
+												</div>
+											</div>
+											<div class="clearfix"></div>
+											<div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+												<div id="us2" style="width: 100%; height: 400px; border: #000 2px solid"></div>
+												<br>
+											</div>
+											<div class="clearfix"></div>
 											<div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
 												<button class="btn btn-primary" type="submit"> Update Profile </button>
 											</div>
@@ -175,10 +208,20 @@ if( $business->getCategory() != null ){
 
 </html>
 
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/location-picker@1.1.1/dist/location-picker.min.js"></script>
+<script src="../theme/js/gmap.js"></script>
+
 <script>
+function loadMap()
+{
+	//googleMapPicker(45.5017, -73.5673);
+	googleMapPicker(<?php echo $lat; ?>, <?php echo $lng; ?>);
+}
 
 $(document).ready(function(e)
 {
+
 	//form-content
 	$("#form-1").on('submit',(function(e)
 	{
@@ -311,3 +354,5 @@ $(document).ready(function(e)
 });
 
 </script>
+
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyBpJ-1-6A67HL_x2UzmsBB4NrT8pd-3oLs&callback=loadMap"></script>

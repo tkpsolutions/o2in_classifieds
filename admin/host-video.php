@@ -79,13 +79,13 @@ if (isset($_GET['id'])) {
                                 <form id="form-1">
                                     <input type="hidden" name="id" value="<?php echo $id; ?>">
                                     <div class="row">
-                                        <div class="col-md-6 col-xs-12">
+                                        <div class="col-xs-12">
                                             <div class="form-group">
                                                 <label for="title">Title</label>
                                                 <input type="text" id="title" name="title" class="form-control" value="<?php echo $title; ?>">
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-xs-12">
+                                        <div class="col-xs-12">
                                             <div class="form-group">
                                                 <label for="description">Description</label>
                                                 <textarea id="description" name="description" class="form-control" rows="4"><?php echo $description; ?></textarea>
@@ -149,13 +149,19 @@ if (isset($_GET['id'])) {
     </div>
     <?php include('footer.php'); ?>
 
+    <script src="//cdn.ckeditor.com/4.14.0/basic/ckeditor.js"></script>
+
     <script>
+        CKEDITOR.replace('description', {});
+
         $(document).ready(function() {
             // form-content
             $("#form-1").on("submit", function(e) {
                 e.preventDefault();
 
-
+                //updating CKEditors
+                for (var instanceName in CKEDITOR.instances)
+                    CKEDITOR.instances[instanceName].updateElement();
 
                 // title
                 value = document.getElementById("title").value.trim();

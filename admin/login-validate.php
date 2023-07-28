@@ -7,7 +7,7 @@
 	
 	$user = $userController->getByEmail($email);
 	
-	if( $user != null && strcmp($password, $user->getPassword()) == 0 )
+	if( $user != null && strcmp($password, $user->getPassword()) == 0 && strcmp("admin", $user->getRole()) == 0 )
 	{
 		$_SESSION['login_user'] = 1;
 		$_SESSION['login_user_id'] = $user->getId();

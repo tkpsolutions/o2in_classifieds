@@ -58,8 +58,9 @@
 <script src="https://cdn.ckeditor.com/4.11.4/basic/ckeditor.js"></script>
 -->
 
-<!-- ckeditor -->
+<!-- ckeditor
 <script src="../theme/ckedit-full/ckeditor.js"></script>
+ -->
 
 <!-- cart-alert div -->
 <div class="row">

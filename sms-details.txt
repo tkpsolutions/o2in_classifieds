@@ -1,3 +1,8 @@
+sample:
+http://139.99.131.165/api/v2/SendSMS?SenderId=SBLSER&Message=Hi%20123%2C%20thank%20you%20for%20registering%20at%20SBL%20SERVICES%20O2IN%20app.%20Please%20enter%20the%20OTP%20123%20for%20your%20account%20activation%20within%201hr.&MobileNumbers=7358334777&PrincipleEntityId=1301167688760756044&TemplateId=1307168378693455448&ApiKey=XiyHNZcXPdlYdhLYh4%2FAklQI31lO6L0nrArq9gMYpPE%3D&ClientId=687700d1-aaeb-44cc-abe1-d1e9445166be
+
+http://139.99.131.165/api/v2/SendSMS?SenderId=SBLSER&Message=Hi%20123%2C%20thank%20you%20for%20registering%20at%20SBL%20SERVICES%20O2IN%20app.%20Please%20enter%20the%20OTP%20123%20for%20your%20account%20activation%20within%201hr.&MobileNumbers=9790256734&PrincipleEntityId=1301167688760756044&TemplateId=1307168378693455448&ApiKey=XiyHNZcXPdlYdhLYh4%2FAklQI31lO6L0nrArq9gMYpPE%3D&ClientId=687700d1-aaeb-44cc-abe1-d1e9445166be
+
 http://139.99.131.165/api/v2/SendSMS?SenderId=SBLSER&Message=Hi%20123%2C%20thank%20you%20for%20registering%20at%20SBL%20SERVICES%20O2IN%20app.%20Please%20enter%20the%20OTP%20123%20for%20your%20account%20activation%20within%201hr.&MobileNumbers=7358334777&PrincipleEntityId=1301167688760756044&TemplateId=1307168378693455448&ApiKey=XiyHNZcXPdlYdhLYh4%2FAklQI31lO6L0nrArq9gMYpPE%3D&ClientId=687700d1-aaeb-44cc-abe1-d1e9445166be
 
 

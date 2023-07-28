@@ -47,6 +47,9 @@
 						<li>
 							<a href="my-catalogue.php">Catalogue <i class="fas fa-th"></i></a>
 						</li>
+						<li>
+							<a href="my-service.php">Service <i class="fas fa-check-square"></i></a>
+						</li>
 						<li class="has-submenu">
 							<a href="">Business <i class="fas fa-chevron-down"></i></a>
 							<ul class="submenu">
@@ -64,25 +67,12 @@
 							</ul>
 						</li>
 						<li class="has-submenu">
-							<a href="#" class="business-name">Hi, .. <?php echo $loggedBusiness->getName(); ?> <i class="fas fa-chevron-down"></i></a>
+							<a href="#" class="business-name">Hi, .. <?php echo substr($loggedBusiness->getName(), 0, 10); ?> <i class="fas fa-chevron-down"></i></a>
 							<ul class="submenu">
-								<li><a href="logout.php">Logout</a></li>
+								<li><a href="logout.php" onclick="return confirm('Are you sure you want to logout?')">Logout</a></li>
 							</ul>
 						</li>
 						<?php
-					}
-					?>
-					<?php
-					if($loggedBusiness == null)
-					{
-					?>
-						<li>
-							<a href="login.php"> Sign In</a>
-						</li>
-						<li>
-							<a href="register.php"><i class="fa-solid fa-plus"></i> Create Free Account</a>
-						</li>
-					<?php
 					}
 					?>
 				</ul>

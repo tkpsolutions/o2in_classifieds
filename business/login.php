@@ -45,7 +45,7 @@ include("init.php");
 										<span class="toggle-password feather-eye"></span>
 									</div>
 								</div>
-								<div class="row">								
+								<div class="row d-none">								
 									<div class="col-md-6 col-sm-6">
 										<div class="text-md-end">
 											<a class="forgot-link" href="#">Forgot password?</a>

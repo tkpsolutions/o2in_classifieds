@@ -7,7 +7,7 @@ if (isset($_GET['id'])) {
 }
 $video = $videoController->getById($videoId);
 $title = "";
-$youtubeLink ="";
+$youtubeLink = "";
 $description = "";
 $status = "";
 
@@ -18,7 +18,6 @@ if ($video != null) {
     $title = $video->getTitle();
     $description = $video->getDescription();
     $status = $video->getStatus();
-    
 }
 
 
@@ -81,31 +80,28 @@ if ($video != null) {
                                 <form id="form-1">
                                     <input type="text" id="id" name="id" value="<?php echo $videoId; ?>" class="hidden" readonly />
                                     <div class="row">
-                                       
-                                    <div class="col-md-6 col-xs-12">
+
+                                        <div class="col-md-6 col-xs-12">
                                             <div class="form-group">
                                                 <label> Youtube Link </label>
                                                 <input type="link" id="youtubeLink" name="youtubeLink" class="form-control" value="<?php echo $youtubeLink; ?>" />
                                             </div>
-                                       </div>
+                                        </div>
 
                                         <div class="col-md-6 col-xs-12">
                                             <div class="form-group">
                                                 <label> Title </label>
                                                 <input type="text" id="title" name="title" class="form-control" value="<?php echo $title; ?>" />
                                             </div>
-                                       </div>
-                                        
-                                       <div class="col-md-6 col-xs-12">
+                                        </div>
+
+                                        <div class="col-xs-12">
                                             <div class="form-group">
                                                 <label> Description </label>
-                                                <input type="text" id="description" name="description" class="form-control" value="<?php echo $description; ?>" />
+                                                <textarea id="description" name="description" class="form-control" rows="4"><?php echo $description; ?></textarea>
                                             </div>
-                                       </div>
-                                        
+                                        </div>
 
-                                        
-                                        
                                         <?php if ($videoId > 0) { ?>
                                             <div class="col-md-6 col-xs-12">
                                                 <div class="form-group">
@@ -114,28 +110,28 @@ if ($video != null) {
                                                         <?php if (strcasecmp($status, "active") == 0) { ?>
                                                             <option value="Active" selected>Active</option>
                                                             <option value="Deactive">Deactive</option>
-                                                            
+
 
                                                         <?php } else { ?>
                                                             <option value="Active" selected>Active</option>
                                                             <option value="Deactive">Deactive</option>
-                                                           
+
                                                         <?php } ?>
                                                     </select>
                                                 </div>
                                             </div>
                                         <?php } ?>
-                                        
-                                      
+
+
                                     </div>
                                     <div class="clearfix"></div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <div class="form-group">
-                                                <?php if ($videoId > 0) { ?>
-                                                    <button type="submit" class="btn btn-md btn-success">Update</button>
-                                                <?php } else { ?>
-                                                    <button type="submit" class="btn btn-md btn-success">Add</button>
-                                                <?php } ?> 
+                                    <div class="col-md-3 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <?php if ($videoId > 0) { ?>
+                                                <button type="submit" class="btn btn-md btn-success">Update</button>
+                                            <?php } else { ?>
+                                                <button type="submit" class="btn btn-md btn-success">Add</button>
+                                            <?php } ?>
                                 </form>
                             </div>
                         </div>
@@ -149,43 +145,44 @@ if ($video != null) {
     </div>
     <!-- /#wrapper -->
 
+    <script src="//cdn.ckeditor.com/4.14.0/basic/ckeditor.js"></script>
+
     <script>
+        CKEDITOR.replace('description', {});
+
         $(document).ready(function() {
             // form-content
             $("#form-1").on("submit", function(e) {
                 e.preventDefault();
 
-                 // youtubeLink
-                 value = document.getElementById("youtubeLink").value.trim();
+                //updating CKEditors
+                for (var instanceName in CKEDITOR.instances)
+                    CKEDITOR.instances[instanceName].updateElement();
+
+                // youtubeLink
+                value = document.getElementById("youtubeLink").value.trim();
                 if (value == null || value === "") {
                     showAlert("2", "Please enter youtubeLink");
                     document.getElementById("youtubeLink").focus();
                     return false;
                 }
-                
-               // title
-		value = document.getElementById("title").value.trim();
-		if( value == null || value == "" )	
-		{
-			showAlert("2", "Please enter title");
-			document.getElementById("title").focus();
-			return false;
-		}      
-        
-        
-        // description
-		value = document.getElementById("description").value.trim();
-		if( value == null || value == "" )	
-		{
-			showAlert("2", "Please enter description");
-			document.getElementById("description").focus();
-			return false;
-		}
+
+                // title
+                value = document.getElementById("title").value.trim();
+                if (value == null || value == "") {
+                    showAlert("2", "Please enter title");
+                    document.getElementById("title").focus();
+                    return false;
+                }
 
 
-
-
-                             
+                // description
+                value = document.getElementById("description").value.trim();
+                if (value == null || value == "") {
+                    showAlert("2", "Please enter description");
+                    document.getElementById("description").focus();
+                    return false;
+                }
 
                 waitingDialog.show("Please wait. Action in progress..!!");
                 $.ajax({
@@ -203,7 +200,7 @@ if ($video != null) {
                             if (data > 0) {
                                 showAlert("1", "Successful Inserted");
                                 waitingDialog.hide();
-                                window.location = "video-view.php";
+                                window.location = "video.php?id=" + data;
                             } else {
                                 showAlert("2", "Error: " + data);
                                 waitingDialog.hide();

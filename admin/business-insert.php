@@ -7,6 +7,7 @@ $cityId = $_POST['cityId'];
 $categoryId = $_POST['categoryId'];
 $mobile = str_replace("'","\'", $_POST['mobile']);
 $password = str_replace("'","\'", $_POST['password']);
+$userId = $_POST['userId'];
 
 $createdDateTime = null;
 $updatedDateTime = null;
@@ -14,25 +15,31 @@ $updatedDateTime = null;
 //previour it was calling usercontroller
 $duplicationBusiness = $businessController->getByMobile($mobile);
 
-if( $duplicationBusiness != null && $businessId != $duplicationBusiness->getId()  ){
-	echo "Mobile number already in use";
-	exit();
+if( strcasecmp($mobile, "0000000000") == 0 ){
+	if( $duplicationBusiness != null && $businessId != $duplicationBusiness->getId()  ){
+		echo "Mobile number already in use";
+		exit();
+	}
 }
 
 if( $businessId > 0  ){
 	//update
 	$status = $_POST['status'];
-	$business = new Business ($businessId, $name, $descriptionShort, $cityId, $categoryId, $createdDateTime,$updatedDateTime,$mobile, $password, $status);
+	$business = new Business ($businessId, $name, $descriptionShort, $userId, $cityId, $categoryId, $createdDateTime,$updatedDateTime,$mobile, $password, $status);
 	$businessController->update($business);
+	echo $businessId;
+	exit();
 
 }
 else{
 	//new
-	$business = new Business ("", $name, $descriptionShort, $cityId, $categoryId, "", "",$mobile, $password,"Active");
-	$businessId = $businessController->add($business);
+	$business = new Business("", $name, $descriptionShort, $userId, $cityId, $categoryId, "", "",$mobile, $password,"Active");
+	$id = $businessController->add($business);
+	echo $id;
+	exit();
 }
 
-echo $businessId;
+echo "Operation Failed";
 exit();
 
 

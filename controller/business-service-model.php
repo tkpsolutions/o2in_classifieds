@@ -3,6 +3,9 @@ class BusinessService {
     private $id;
     private $businessId;
     private $name;
+	private $price;
+    private $tax;
+    private $discount;
     private $status;
 
     private $business; // linkage variable
@@ -31,6 +34,30 @@ class BusinessService {
 		$this->name = $name;
 	}
 
+	public function getPrice(){
+		return $this->price;
+	}
+
+	public function setPrice($price){
+		$this->price = $price;
+	}
+
+	public function getTax(){
+		return $this->tax;
+	}
+
+	public function setTax($tax){
+		$this->tax = $tax;
+	}
+
+	public function getDiscount(){
+		return $this->discount;
+	}
+
+	public function setDiscount($discount){
+		$this->discount = $discount;
+	}
+
 	public function getStatus(){
 		return $this->status;
 	}
@@ -47,10 +74,13 @@ class BusinessService {
 		$this->business = $business;
 	}
 
-    public function __construct($id, $businessId, $name, $status) {
+    public function __construct($id, $businessId, $name, $price, $tax, $discount, $status) {
         $this->id = $id;
         $this->businessId = $businessId;
         $this->name = $name;
+		$this->price = $price;
+		$this->tax = $tax;
+		$this->discount = $discount;
         $this->status = $status;
     }
 }

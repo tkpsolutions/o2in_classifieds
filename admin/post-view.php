@@ -1,39 +1,6 @@
 <?php
 include('init.php');
-
-$id = 0;
-$cityId = 0;
-$postCategoryId = 0;
-$title = "";
-$description = "";
-$createdDateTime = "";
-$updatedDateTime = "";
-$image = "";
-$status = "";
-$imageRequired = "required";
-if (isset($_GET['id'])) {
-    $postId = $_GET['id'];
-    $post = $postController->getById($postId);
-
-    if ($post != null) {
-        $id = $post->getId();
-        $cityId = $post->getCityId();
-        $postCategoryId = $post->getPostCategoryId();
-        $title = $post->getTitle();
-        $description = $post->getDescription();
-        $createdDateTime = $post->getCreatedDateTime();
-        $updatedDateTime = $post->getUpdatedDateTime();
-        $image = "../images/post/" . $post->getId() . "." . $post->getImage();
-        if (is_file($image)) {
-            $imageRequired = "";
-        }
-        $status = $post->getStatus();
-    }
-}
-
 $posts = $postController->getAll();
-$cities = $cityController->getAll();
-$postCategories = $postCategoryController->getAll();
 ?>
 
 
@@ -78,7 +45,6 @@ $postCategories = $postCategoryController->getAll();
                                             <th>City</th>
                                             <th>PostCategory</th>
                                             <th>Title</th>
-                                            <th>Description</th>
                                             <th>Image</th>
                                             <th>Actions</th>
                                         </tr>
@@ -95,7 +61,6 @@ $postCategories = $postCategoryController->getAll();
                                                 <td><?php echo $post->getCity()->getName(); ?></td>
                                                 <td><?php echo $post->getPostCategory()->getName(); ?></td>
                                                 <td><?php echo $post->getTitle(); ?></td>
-                                                <td><?php echo $post->getDescription(); ?></td>
                                                 <td><img src="<?php echo $imagePath; ?>" alt="Image" width="50"></td>
                                                 <td>
                                                     <a href="post.php?id=<?php echo $post->getId(); ?>" class="btn btn-primary btn-xs">Edit</a>

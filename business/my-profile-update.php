@@ -24,10 +24,12 @@ $tempDescription = str_replace("'","\'",$description);
 $tempAddress1 = str_replace("'","\'",$address1);
 $tempAddress2 = str_replace("'","\'",$address2);
 
-$lat = "0";
-$lng = "0";
+$lat = $_POST['lat'];
+$lng = $_POST['lng'];
 
-$business = new Business($businessId,$tempName,$tempShortDesc,$cityId,$categoryId,"","",$mobile,"","");
+$businessOriginal = $businessController->getById($businessId);
+
+$business = new Business($businessId,$tempName,$tempShortDesc, $businessOriginal->getUserId(), $cityId,$categoryId,"","",$mobile,"","");
 $businessController->update($business);
 
 $businessDetail = $businessDetailController->getById($businessDetailId);

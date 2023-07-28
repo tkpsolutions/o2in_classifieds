@@ -82,7 +82,7 @@ class BusinessTimingController {
     }
     
     public function getByBusinessId($businessId) {
-        $query = "SELECT * FROM business_timing WHERE businessId = $businessId order by dayNumber";
+        $query = "SELECT * FROM business_timing WHERE businessId = $businessId order by dayNumber, fromTime";
         $businessTimingController = new BusinessTimingController();
         return $businessTimingController->createObjects($query);
     }

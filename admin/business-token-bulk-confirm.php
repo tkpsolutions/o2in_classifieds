@@ -20,15 +20,40 @@ $endDate = $_GET['tokenToDate'];
 $startTimeSource = $_GET['fromTime'];
 $endTimeSource = $_GET['toTime'];
 
+//altered endDate
+$endDateAltered = new DateTime($endDate);
+$endDateAltered->add(new DateInterval('P1D'));
+//echo $endDateAltered->format('Y-m-d');
+
 $period = new DatePeriod(
     new DateTime($startDate),
     new DateInterval('P1D'),
-    //$end = $end->modify( '+1 day' ); 
-    new DateTime($endDate)
+    //$end = $end->modify( '+1 day' );
+    //new DateTime($endDate) 
+    new DateTime($endDateAltered->format('Y-m-d'))
 );
 
 $slotDurationMinutes = $_GET['duration'];
 $slotDuration = '+' . $slotDurationMinutes . ' minutes'; //minutes
+
+//find total days and count
+$totalTokens = 0;
+$totalDays = 0;
+foreach ($period as $key => $value) {
+    //re-init the time range
+    $startTime = $startTimeSource;
+    $endTime = $endTimeSource;
+    $totalDays++;
+
+    $dayNumber = date('N', strtotime($value->format('Y-m-d')));
+    $dateTemp = date('Y-m-d', strtotime($value->format('Y-m-d')));
+
+    while (strtotime($endTime) > strtotime($startTime)) {
+        $tokenEndTime = date('H:i:s', strtotime($startTime . $slotDuration));
+        $totalTokens++;
+        $startTime = $tokenEndTime;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -77,15 +102,25 @@ $slotDuration = '+' . $slotDurationMinutes . ' minutes'; //minutes
                             <div class="panel-body">
                                 <div class="row">
                                     <form action="business-token-bulk-insert.php" method="POST">
-                                        <input type="text" value="<?php echo $businessId; ?>" name="businessId" />
-                                        <input type="text" value="<?php echo $businessServiceId; ?>" name="businessServiceId" />
-                                        <input type="text" value="<?php echo $cityId; ?>" name="cityId" />
-                                        <input type="text" value="<?php echo $startDate; ?>" name="tokenFromDate" />
-                                        <input type="text" value="<?php echo $endDate; ?>" name="tokenToDate" />
-                                        <input type="text" value="<?php echo $startTimeSource; ?>" name="fromTime" />
-                                        <input type="text" value="<?php echo $endTimeSource; ?>" name="toTime" />
-                                        <input type="text" value="<?php echo $slotDurationMinutes; ?>" name="duration" />
+                                        <div class="hidden">
+                                            <input readonly type="text" value="<?php echo $businessId; ?>" name="businessId" />
+                                            <input readonly type="text" value="<?php echo $businessServiceId; ?>" name="businessServiceId" />
+                                            <input readonly type="text" value="<?php echo $cityId; ?>" name="cityId" />
+                                            <input readonly type="text" value="<?php echo $startDate; ?>" name="tokenFromDate" />
+                                            <input readonly type="text" value="<?php echo $endDate; ?>" name="tokenToDate" />
+                                            <input readonly type="text" value="<?php echo $startTimeSource; ?>" name="fromTime" />
+                                            <input readonly type="text" value="<?php echo $endTimeSource; ?>" name="toTime" />
+                                            <input readonly type="text" value="<?php echo $slotDurationMinutes; ?>" name="duration" />
+                                        </div>
                                         <button type="submit" class="btn btn-success">Confirm Tokens</button>
+                                        <h5>Start Date : <?php echo $startDate; ?> </h5>
+                                        <h5>End Date : <?php echo $endDate; ?> </h5>
+                                        <h5>Token Duration : <?php echo $slotDurationMinutes . " Mins"; ?> </h5>
+                                        <h5>Slot From : <?php echo PF_getManualDateTimeFormat($startTimeSource, "h:i A"); ?> </h5>
+                                        <h5>Slot To : <?php echo PF_getManualDateTimeFormat($endTimeSource, "h:i A"); ?> </h5>
+                                        ------------
+                                        <h5>Total Days : <?php echo $totalDays; ?> </h5>
+                                        <h5>Total Tokens : <?php echo $totalTokens; ?> </h5>
                                     </form>
                                     <div class="col-md-8 col-md-push-2 col-sm-12 col-xs-12">
                                         <table class="table table-bordered">
@@ -122,8 +157,8 @@ $slotDuration = '+' . $slotDurationMinutes . ' minutes'; //minutes
                                                 ?>
                                                         <tr class="<?php echo $rowClass; ?>">
                                                             <td><?php echo $dateTemp; ?></td>
-                                                            <td><?php echo $startTime; ?></td>
-                                                            <td><?php echo $tokenEndTime; ?></td>
+                                                            <td><?php echo PF_getManualDateTimeFormat($startTime, "h:i A"); ?></td>
+                                                            <td><?php echo PF_getManualDateTimeFormat($tokenEndTime, "h:i A"); ?></td>
                                                             <td><?php echo $slotDurationMinutes . " Mins"; ?></td>
                                                         </tr>
                                                 <?php

@@ -11,6 +11,10 @@ $endTimeSource = $_POST['toTime'];
 $slotDurationMinutes = $_POST['duration'];
 $slotDuration = '+' . $slotDurationMinutes . ' minutes'; //minutes
 
+//altered endDate
+$endDateAltered = new DateTime($endDate);
+$endDateAltered->add(new DateInterval('P1D'));
+
 $userId = 0;
 $bookedDateTime = "";
 $walletId = 0;
@@ -23,7 +27,8 @@ $period = new DatePeriod(
     new DateTime($startDate),
     new DateInterval('P1D'),
     //$end = $end->modify( '+1 day' ); 
-    new DateTime($endDate)
+    //new DateTime($endDate)
+    new DateTime($endDateAltered->format('Y-m-d'))
 );
 
 $businessTokens = array();

@@ -70,7 +70,7 @@ $eventCategories = $eventCategoryController->getAll();
             <div class="admin-panel-content">
                 <div class="row">
 
-                    <div class="col-md-4 col-sm-10 col-xs-12">
+                    <div class="col-12">
                         <!-- <?php include("event-menu.php"); ?> -->
                         <div class="panel app-panel-1">
                             <div class="panel-heading">
@@ -95,7 +95,7 @@ $eventCategories = $eventCategoryController->getAll();
                                 <form id="event-form" method="post" enctype="multipart/form-data">
                                     <input type="hidden" name="id" value="<?php echo $id; ?>">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Select City</label>
                                                 <select name="cityId" id="cityId" class="form-control select2">
@@ -109,7 +109,7 @@ $eventCategories = $eventCategoryController->getAll();
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 ">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Select Event category</label>
                                                 <select name="eventCategoryId" id="eventCategoryId" class="form-control select2">
@@ -123,7 +123,7 @@ $eventCategories = $eventCategoryController->getAll();
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="eventDate">Event Date</label>
                                                 <input type="date" id="eventDate" name="eventDate" class="form-control" value="<?php echo $eventDate; ?>">
@@ -195,12 +195,20 @@ $eventCategories = $eventCategoryController->getAll();
             </div>
         </div>
     </div>
-    </div>
+
     <?php include('footer.php'); ?>
+
+    <script src="//cdn.ckeditor.com/4.14.0/basic/ckeditor.js"></script>
     <script>
+        CKEDITOR.replace( 'description', {});
+        
         $(document).ready(function() {
             $("#event-form").on('submit', function(e) {
                 e.preventDefault();
+
+                //updating CKEditors
+                for(var instanceName in CKEDITOR.instances)
+                    CKEDITOR.instances[instanceName].updateElement();
 
                 var value = document.getElementById("eventCategoryId");
                 if (value.selectedIndex === 0) {

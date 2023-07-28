@@ -7,19 +7,25 @@ class BusinessController {
         $rows = mysqli_query($db_connection, $query);
 
         $businesses = array();
+        $userIds = "0";
         $cityIds = "0";
         $categoryIds = "0";
         
 
         while ($row = mysqli_fetch_array($rows)) {
-            $business = new Business($row['id'], $row['name'], $row['descriptionShort'], $row['cityId'], $row['categoryId'], $row['createdDateTime'], $row['updatedDateTime'], $row['mobile'], $row['password'], $row['status']);
+            $business = new Business($row['id'], $row['name'], $row['descriptionShort'], $row['userId'], $row['cityId'], $row['categoryId'], $row['createdDateTime'], $row['updatedDateTime'], $row['mobile'], $row['password'], $row['status']);
             array_push($businesses, $business);
+            $userIds = $userIds . "," . $row['userId'];
             $cityIds = $cityIds . "," . $row['cityId'];
             $categoryIds = $categoryIds . "," . $row['categoryId'];
             
         }
 
         if (sizeof($businesses)) {
+
+            $userController = new UserController();
+            $users = $userController->getByIds($userIds);
+
             $cityController = new CityController();
             $citys = $cityController->getByIds($cityIds);
 
@@ -29,6 +35,11 @@ class BusinessController {
             
 
             foreach ($businesses as $business) {
+                foreach ($users as $user) {
+                    if ($business->getUserId() == $user->getId()) {
+                        $business->setUser($user);
+                    }
+                }
                 foreach ($citys as $city) {
                     if ($business->getCityId() == $city->getId()) {
                         $business->setCity($city);
@@ -50,25 +61,35 @@ class BusinessController {
         include("db_connection.php");
         $rows = mysqli_query($db_connection, $query);
         $business = null;
+        $userIds = "0";
         $cityIds = "0";
         $categoryIds = "0";
 
 
         while ($row = mysqli_fetch_array($rows)) {
-            $business = new Business($row['id'], $row['name'], $row['descriptionShort'], $row['cityId'], $row['categoryId'], $row['createdDateTime'], $row['updatedDateTime'], $row['mobile'], $row['password'], $row['status']);
+            $business = new Business($row['id'], $row['name'], $row['descriptionShort'],$row['userId'], $row['cityId'], $row['categoryId'], $row['createdDateTime'], $row['updatedDateTime'], $row['mobile'], $row['password'], $row['status']);
+            $userIds = $userIds . "," . $row['userId'];
             $cityIds = $cityIds . "," . $row['cityId'];
             $categoryIds = $categoryIds . "," . $row['categoryId'];
            
         }
 
         if ($business != null) {
+            $userController = new UserController();
+            $users = $userController->getByIds($userIds);
+
             $cityController = new CityController();
             $citys = $cityController->getByIds($cityIds);
 
             $categoryController = new CategoryController();
             $categories = $categoryController->getByIds($categoryIds);
-
             
+
+            foreach ($users as $user) {
+                if ($business->getUserId() == $user->getId()) {
+                    $business->setUser($user);
+                }
+            }
 
             foreach ($citys as $city) {
                 if ($business->getCityId() == $city->getId()) {
@@ -94,6 +115,12 @@ class BusinessController {
 
     public function getByName($name) {
         $query = "SELECT * FROM business WHERE name = '$name'";
+        $businessController = new BusinessController();
+        return $businessController->createObjects($query);
+    }
+
+    public function getByUserId($userId) {
+        $query = "SELECT * FROM business WHERE userId = $userId";
         $businessController = new BusinessController();
         return $businessController->createObjects($query);
     }
@@ -161,23 +188,23 @@ class BusinessController {
         $businessController = new BusinessController();
         $business = $businessController->createObject($query);
         return $business;
-    }    
-
+    } 
+    
     public function getCountCityWise() {
-        $query = "SELECT count(*) as id, name, descriptionShort, cityId, categoryId, createdDateTime, updatedDateTime, mobile, password, status FROM `business` where status = 'active' GROUP by cityId;";
+        $query = "SELECT count(*) as id, name, descriptionShort, userId, cityId, categoryId, createdDateTime, updatedDateTime, mobile, password, status FROM `business` where status = 'active' GROUP by cityId;";
         $businessController = new BusinessController();
         return $businessController->createObjects($query);
     }
 
     public function getCountCategoryWise() {
-        $query = "SELECT count(*) as id, name, descriptionShort, cityId, categoryId, createdDateTime, updatedDateTime, mobile, password, status FROM `business` where status = 'active' GROUP by categoryId;";
+        $query = "SELECT count(*) as id, name, descriptionShort, userId, cityId, categoryId, createdDateTime, updatedDateTime, mobile, password, status FROM `business` where status = 'active' GROUP by categoryId;";
         $businessController = new BusinessController();
         return $businessController->createObjects($query);
     }
    
     public function add($business) {
         include('db_connection.php');
-        $query = "INSERT INTO `business` ( `name`, `descriptionShort`,`cityId`,`categoryId`,`createdDateTime`, `updatedDateTime`,`mobile`,`password`,`status`) VALUES ( '" . $business->getName() . "', '" . $business->getDescriptionShort() . "', '" . $business->getCityId() . "','" . $business->getCategoryId() . "',NOW(), NOW(),'" . $business->getMobile() . "','" . $business->getPassword() . "','" . $business->getStatus() . "')";
+        $query = "INSERT INTO `business` ( `name`, `descriptionShort`,`userId`,`cityId`,`categoryId`,`createdDateTime`, `updatedDateTime`,`mobile`,`password`,`status`) VALUES ('" . $business->getName() . "', '" . $business->getDescriptionShort() . "', '" . $business->getUserId() . "','" . $business->getCityId() . "','" . $business->getCategoryId() . "',NOW(), NOW(),'" . $business->getMobile() . "','" . $business->getPassword() . "','" . $business->getStatus() . "')";
             
         mysqli_query($db_connection, $query);
         return mysqli_insert_id($db_connection);
@@ -185,7 +212,7 @@ class BusinessController {
 
     public function update($business) {
         include('db_connection.php');
-        $query = "UPDATE `business` SET `name` = '" . $business->getName() . "', `descriptionShort` = '" . $business->getDescriptionShort() . "', `cityId` = '" . $business->getCityId() . "', `categoryId` = '" . $business->getCategoryId() . "', `mobile` = '" . $business->getMobile() . "', `status` = '" . $business->getStatus() . "',  updatedDateTime = NOW() WHERE id = " . $business->getId();
+        $query = "UPDATE `business` SET `name` = '" . $business->getName() . "', `descriptionShort` = '" . $business->getDescriptionShort() . "',`userId` = '" . $business->getUserId() . "', `cityId` = '" . $business->getCityId() . "', `categoryId` = '" . $business->getCategoryId() . "', `mobile` = '" . $business->getMobile() . "', `status` = '" . $business->getStatus() . "',  updatedDateTime = NOW() WHERE id = " . $business->getId();
         return mysqli_query($db_connection, $query);
     }
 

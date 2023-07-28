@@ -16,10 +16,16 @@ if (isset($_GET['service_id'])) {
 $businessService = $businessServiceController->getById($businessServiceId);
 
 $name = "";
+$price = "";
+$discount = "";
+$tax = "";
 $status ="";
 
 if ($businessService != null) {
     $name = $businessService->getName();
+    $price = $businessService->getPrice();
+    $tax = $businessService->getTax();
+    $discount = $businessService->getDiscount();
         $status = $businessService->getStatus();
     
 }
@@ -88,7 +94,27 @@ $businessServices = $businessServiceController->getByBusinessId($businessId);
                                                         <input type="text" id="name" name="name" class="form-control" autocomplete="off" value="<?php echo $name; ?>" required />
                                                     </div>
                                                 </div>
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div class="form-group">
+                                                        <label> Price </label>
+                                                        <input type="number" id="price" name="price" class="form-control" autocomplete="off" value="<?php echo $price; ?>" required />
+                                                    </div>
+                                                </div>
                                                 
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div class="form-group">
+                                                        <label> Tax Percentage </label>
+                                                        <input type="number" id="tax" name="tax" class="form-control" autocomplete="off" value="<?php echo $tax; ?>" required />
+                                                    </div>
+                                                </div>
+                                               
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div class="form-group">
+                                                        <label> Discount Percentage </label>
+                                                        <input type="number" id="discount" name="discount" class="form-control" autocomplete="off" value="<?php echo $discount; ?>" required />
+                                                    </div>
+                                                </div>
+
                                                 <?php if ($businessServiceId > 0) { ?>
                                             <div class="col-md-6 col-xs-12">
                                                 <div class="form-group">
@@ -126,6 +152,9 @@ $businessServices = $businessServiceController->getByBusinessId($businessId);
                                                     <th> Sl.no </th>
                                                     <th> Business </th>
                                                     <th> Name </th>
+                                                    <th> Price </th>
+                                                    <th> Tax </th>
+                                                    <th> Dicount </th>
                                                     <th> Action </th>
                                                 </tr>
                                             </thead>
@@ -135,12 +164,19 @@ $businessServices = $businessServiceController->getByBusinessId($businessId);
                                                 foreach ($businessServices as $businessService) {
                                                     $businessName = $businessService->getBusiness()->getName();
                                                     $name = $businessService->getName();
+                                                    $price = $businessService->getPrice();
+                                                    $tax = $businessService->getTax();
+                                                    $discount = $businessService->getDiscount();
+
                                                     $editBusinessService = "business-service-view.php?id=" . $businessId . "&service_id=" . $businessService->getId();
                                                 ?>
                                                     <tr>
                                                         <td><?php echo $i++; ?></td>
                                                         <td><?php echo $businessName; ?></td>
                                                         <td><?php echo $name; ?></td>
+                                                        <td><?php echo $price; ?></td>
+                                                        <td><?php echo $tax; ?></td>
+                                                        <td><?php echo $discount; ?></td>
                                                         <td>
                                                     <a href="<?php echo $editBusinessService; ?>" class="btn btn-sm btn-success"> Edit </a>
                                                 </td>

@@ -46,7 +46,8 @@ include('init.php');
                                             <thead>
                                                 <tr>
                                                     <th>Business ID</th>
-                                                    <th>Name</th>
+                                                    <th>User Name</th>
+                                                    <th>Business Name</th>
                                                     <th>City Name</th>
                                                     <th>Category Name</th>
                                                     <th>Mobile</th>
@@ -60,7 +61,8 @@ include('init.php');
                                                 $businesses = $businessController->getAll();
                                                 foreach ($businesses as $business) {
                                                     $businessId = $business->getId();
-                                                    $name = $business->getName();
+                                                    $userName = $business->getUser()->getName();
+                                                    $businessName = $business->getName();
                                                     $descriptionShort = $business->getDescriptionShort();
                                                     $cityName = $business->getCity()->getName();
                                                     $categoryName = "-";
@@ -82,7 +84,8 @@ include('init.php');
                                                 ?>
                                                     <tr>
                                                         <td><?php echo $businessId; ?></td>
-                                                        <td><?php echo $name; ?></td>
+                                                        <td><?php echo $userName; ?></td>
+                                                        <td><?php echo $businessName; ?></td>
                                                         <td><?php echo $cityName; ?></td>
                                                         <td><?php echo $categoryName; ?></td>
                                                         <td><?php echo $mobile; ?></td>  

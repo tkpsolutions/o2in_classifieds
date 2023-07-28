@@ -63,7 +63,7 @@ $postCategories = $postCategoryController->getAll();
             <div class="admin-panel-content">
                 <div class="row">
 
-                    <div class="col-md-4 col-sm-10 col-xs-12">
+                    <div class="col-xs-12">
                         <div class="panel app-panel-1">
                             <div class="panel-heading">
                                 <h3 class="panel-title">
@@ -87,7 +87,7 @@ $postCategories = $postCategoryController->getAll();
                                 <form id="form-1">
                                     <input type="hidden" name="id" value="<?php echo $id; ?>">
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Select City</label>
                                                 <select name="cityId" id="cityId" class="form-control select2">
@@ -101,9 +101,9 @@ $postCategories = $postCategoryController->getAll();
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Select post category</label>
+                                                <label>Select Post category</label>
                                                 <select name="postCategoryId" id="postCategoryId" class="form-control select2">
                                                     <option value="0">Select</option>
                                                     <?php
@@ -118,13 +118,13 @@ $postCategories = $postCategoryController->getAll();
 
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="title">post Title</label>
+                                                <label for="title">Post Title</label>
                                                 <input type="text" id="title" name="title" class="form-control" value="<?php echo $title; ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="description">post Description</label>
+                                                <label for="description">Post Description</label>
                                                 <textarea id="description" name="description" class="form-control" rows="4"><?php echo $description; ?></textarea>
                                             </div>
                                         </div>
@@ -180,12 +180,19 @@ $postCategories = $postCategoryController->getAll();
     </div>
     <?php include('footer.php'); ?>
 
+    <script src="//cdn.ckeditor.com/4.14.0/basic/ckeditor.js"></script>
     <script>
+        CKEDITOR.replace( 'description', {});
+
         $(document).ready(function(e) {
             //form-content
             $("#form-1").on('submit', (function(e) {
                 e.preventDefault();
 
+                //updating CKEditors
+                for(var instanceName in CKEDITOR.instances)
+                    CKEDITOR.instances[instanceName].updateElement();
+                    
                 // city_id
                 value = document.getElementById("cityId");
                 if (value.selectedIndex == 0) {

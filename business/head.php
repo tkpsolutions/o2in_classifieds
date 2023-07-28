@@ -26,8 +26,9 @@
 <!-- Main CSS -->
 <link rel="stylesheet" href="../assets/css/style.css">
 
-<!-- Alert Script -->
+<!-- Alert Script
 <script src="../assets/js/jquery-3.6.3.min.js"></script>
+-->
 
 <!-- Datatables CSS -->
 <link rel="stylesheet" href="../assets/plugins/datatables/datatables.min.css">

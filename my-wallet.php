@@ -1,6 +1,12 @@
 <?php
 include("init.php");
 $wallets = $walletController->getByUserId($loggedUser->getId());
+$totalDeposit = 0;
+$totalUsed = 0;
+foreach($wallets as $wallet){
+	$totalDeposit = $totalDeposit + $wallet->getDeposit();
+	$totalUsed = $totalUsed + $wallet->getUsed();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +32,9 @@ $wallets = $walletController->getByUserId($loggedUser->getId());
 							<h4>My Wallet</h4>
 						</div>
 						<div class="card-body">
+							<h5>Total deposited : <?php echo $totalDeposit; ?> </h5>
+							<h5>Total used : <?php echo $totalUsed; ?> </h5>
+							<h5>Balance : <?php echo $totalDeposit - $totalUsed; ?> </h5>
 							<div class="profile-form">
 								<form method="GET" action="my-wallet-rp-deposit.php">
 									<div class="row">

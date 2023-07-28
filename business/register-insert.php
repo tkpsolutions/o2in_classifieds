@@ -31,10 +31,12 @@ $tempDescription = str_replace("'","\'",$description);
 $tempAddress1 = str_replace("'","\'",$address1);
 $tempAddress2 = str_replace("'","\'",$address2);
 
+$userId = 1;
+
 $lat = "0";
 $lng = "0";
 
-$business = new Business($businessId,$tempName,$tempShortDesc,$cityId,$categoryId,"","",$mobile,$password,"active");
+$business = new Business($businessId,$tempName,$tempShortDesc, $userId, $cityId,$categoryId,"","",$mobile,$password,"active");
 $businessDetailId = $businessController->add($business);
 
 $_SESSION['login_business'] = 1;

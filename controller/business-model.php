@@ -4,6 +4,7 @@
 		private $id;
 		private $name;
 		private $descriptionShort;
+        private $userId;
 		private $cityId;
 		private $categoryId;
 		private $createdDateTime;
@@ -13,6 +14,7 @@
 		private $status;
 
 		//linkage variable
+        private $user;
 		 private $city;
 		 private $category;
 
@@ -40,6 +42,13 @@
     
         public function setDescriptionShort($descriptionShort){
             $this->descriptionShort = $descriptionShort;
+        }
+        public function getUserId(){
+            return $this->userId;
+        }
+    
+        public function setUserId($userId){
+            $this->userId = $userId;
         }
     
         public function getCityId(){
@@ -97,6 +106,15 @@
         public function setStatus($status){
             $this->status = $status;
         }
+
+
+        public function getUser(){
+            return $this->user;
+        }
+    
+        public function setUser($user){
+            $this->user = $user;
+        }
     
         public function getCity(){
             return $this->city;
@@ -113,10 +131,11 @@
         public function setCategory($category){
             $this->category = $category;
         }
-		public function __construct($id, $name, $descriptionShort, $cityId, $categoryId, $createdDateTime, $updatedDateTime, $mobile, $password, $status){
+		public function __construct($id, $name, $descriptionShort, $userId, $cityId, $categoryId, $createdDateTime, $updatedDateTime, $mobile, $password, $status){
 			$this->id = $id;
 			$this->name = $name;
 			$this->descriptionShort = $descriptionShort;
+            $this->userId = $userId;
 			$this->cityId = $cityId;
 			$this->categoryId = $categoryId;
 			$this->createdDateTime= $createdDateTime;

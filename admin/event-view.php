@@ -1,8 +1,6 @@
 <?php
 include('init.php');
 $events = $eventController->getAll();
-$cities = $cityController->getAll();
-$eventCategories = $eventCategoryController->getAll();
 ?>
 
 

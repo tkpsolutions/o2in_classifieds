@@ -10,7 +10,7 @@ class BusinessServiceController {
         $businessIds = "0";
 
         while ($row = mysqli_fetch_array($rows)) {
-            $businessService = new BusinessService($row['id'], $row['businessId'], $row['name'], $row['status']);
+            $businessService = new BusinessService($row['id'], $row['businessId'], $row['name'], $row['price'], $row['tax'], $row['discount'], $row['status']);
             array_push($businessServices, $businessService);
             $businessIds = $businessIds . "," . $row['businessId'];
         }
@@ -39,8 +39,8 @@ class BusinessServiceController {
         $businessIds = "0";
 
         while ($row = mysqli_fetch_array($rows)) {
-            $businessService = new BusinessService($row['id'], $row['businessId'], $row['name'], $row['status']);
-            $businessIds = $businessIds . "," . $row['businessId'];
+            $businessService = new BusinessService($row['id'], $row['businessId'], $row['name'], $row['price'], $row['tax'], $row['discount'], $row['status']);
+           $businessIds = $businessIds . "," . $row['businessId'];
         }
 
         if ($businessService !== null) {
@@ -93,14 +93,14 @@ class BusinessServiceController {
     }
     public function add($businessService) {
         include('db_connection.php');
-        $query = "INSERT INTO business_service ( `businessId`, `name`, `status`) VALUES ( '" . $businessService->getBusinessId() . "', '" . $businessService->getName() . "', '" . $businessService->getStatus() . "')";
+        $query = "INSERT INTO business_service ( `businessId`, `name`, `price`, `tax`, `discount`, `status`) VALUES ( '" . $businessService->getBusinessId() . "', '" . $businessService->getName() . "', '" . $businessService->getPrice() . "', '" . $businessService->getTax() . "','" . $businessService->getDiscount() . "', '" . $businessService->getStatus() . "')";
         mysqli_query($db_connection, $query);
         return mysqli_insert_id($db_connection);
     }
 
     public function update($businessService) {
         include('db_connection.php');
-        $query = "UPDATE business_service SET businessId = '" . $businessService->getBusinessId() . "', name = '" . $businessService->getName() . "', status = '" . $businessService->getStatus() . "' WHERE id = " . $businessService->getId();
+        $query = "UPDATE business_service SET businessId = '" . $businessService->getBusinessId() . "', name = '" . $businessService->getName() . "', price = '" . $businessService->getPrice() . "', tax = '" . $businessService->getTax() . "', discount = '" . $businessService->getDiscount() . "', status = '" . $businessService->getStatus() . "' WHERE id = " . $businessService->getId();
         return mysqli_query($db_connection, $query);
     }
 

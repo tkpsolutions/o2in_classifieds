@@ -76,7 +76,18 @@ if (isset($_GET['id'])) {
                                             <input type="hidden" value="<?php echo $businessId; ?>" name="businessId" id="businessId" />
                                             <div class="form-group">
                                                 <label for="dayNumber">Day Number</label>
-                                                <input type="number" min="1" max="7" class="form-control" id="dayNumber" name="dayNumber" placeholder="Enter Day Number" required>
+                                                <select class="form-control" id="dayNumber" name="dayNumber">
+                                                    <option value="0"> Select a day </option>
+                                                    <?php
+                                                    for($i = 1; $i <= 7; $i++){
+                                                    ?>
+                                                        <option value="<?php echo $i; ?>">
+                                                            <?php echo PF_ConvertNumberToDay($i); ?>
+                                                        </option>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </select>
                                             </div>
 
                                             <div class="form-group">
@@ -111,10 +122,9 @@ if (isset($_GET['id'])) {
                                         </form>
                                     </div>
                                     <div class="col-md-8 col-sm-8 col-xs-12">
-                                        <table class="table table-bordered app-table data-table">
+                                        <table class="table table-bordered app-table">
                                             <thead>
                                                 <tr>
-                                                    <th> Business </th>
                                                     <th> Day Number </th>
                                                     <th> From Time </th>
                                                     <th> To Time </th>
@@ -135,10 +145,18 @@ if (isset($_GET['id'])) {
                                                     $isHoliday = $businessTiming->getIsHoliday();
                                                     $status = $businessTiming->getStatus();
                                                     $deleteLink = "business-timing-delete.php?id=" . $businessTimingId . "&businessId=" . $businessId;
+
+                                                    //row class
+                                                    $rowClass = "";
+                                                    if( $isFullDay == 1 ){
+                                                        $rowClass = "bg-success";
+                                                    }
+                                                    else if( $isHoliday == 1 ){
+                                                        $rowClass = "bg-danger";
+                                                    }
                                                 ?>
-                                                    <tr>
-                                                        <td><?php echo   $businessId; ?></td>
-                                                        <td><?php echo $dayNumber; ?></td>
+                                                    <tr class="<?php echo $rowClass; ?>">
+                                                        <td><?php echo PF_ConvertNumberToDay($dayNumber); ?></td>
                                                         <td><?php echo $fromTime; ?></td>
                                                         <td><?php echo $toTime; ?></td>
                                                         <td><?php echo $isFullDay ? 'Yes' : 'No'; ?></td>
@@ -170,13 +188,15 @@ if (isset($_GET['id'])) {
             $("#form-1").on('submit', function(e) {
                 e.preventDefault();
 
+
                 //business id
-                value = document.getElementById("businessId");
+                value = document.getElementById("dayNumber");
                 if (value.selectedIndex == 0) {
-                    showAlert("2", "Please select Business");
-                    value = document.getElementById("businessId").focus();
+                    showAlert("2", "Please select Day");
+                    value = document.getElementById("dayNumber").focus();
                     return false;
                 }
+
                 //daynumber
                 value = document.getElementById("dayNumber").value.trim();
                 if (value == "") {
